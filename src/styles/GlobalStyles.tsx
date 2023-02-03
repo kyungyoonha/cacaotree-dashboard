@@ -26,7 +26,16 @@ const GlobalStyles = createGlobalStyle`
         list-style: none;
     }
 
-    
+    .ant-table-fixed {
+        table-layout: fixed;
+    }
+
+    .ant-table table { font-size: 10px; }
+
+    .dashboard table {
+        width: auto;
+        max-width: 150px !important;
+    }
 `;
 
 export default GlobalStyles;

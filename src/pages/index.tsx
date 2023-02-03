@@ -1,9 +1,21 @@
+import React from "react";
 import Head from "next/head";
 import MainLayout from "@/components/MainLayout";
-import { Col, Row } from "antd";
+import { Col, Row, Spin, Statistic, Table } from "antd";
 import Content from "@/components/Content";
+import useSWR from "swr";
+import columns from "@/configs/columns";
+import CountUp from "react-countup";
 
 export default function Home() {
+  const { data, isLoading } = useSWR(
+    `/api/getBookingByDate/${"2023-02-03"}`,
+    {}
+  );
+
+  const formatter = (value: any) => <CountUp end={value} separator="," />;
+  // console.log(data);
+  // console.log(["few", "sss", "fewd"].includes("sss"));
   return (
     <>
       <Head>
@@ -14,14 +26,58 @@ export default function Home() {
       </Head>
       <MainLayout>
         <Row gutter={[30, 30]}>
-          <Col xs={12}>
-            <Content>Content</Content>
+          <Col xs={6}>
+            <Content>
+              <Statistic
+                title="Spa Peso"
+                value={112893}
+                prefix={"P"}
+                formatter={formatter}
+              />
+            </Content>
           </Col>
-          <Col xs={12}>
-            <Content>Content</Content>
+          <Col xs={6}>
+            <Content>
+              <Statistic
+                title="Spa Dollar"
+                value={112893}
+                prefix={"$"}
+                formatter={formatter}
+              />
+            </Content>
+          </Col>
+          <Col xs={6}>
+            <Content>
+              <Statistic
+                title="Spa Won"
+                prefix={"₩"}
+                value={112893}
+                formatter={formatter}
+              />
+            </Content>
+          </Col>
+          <Col xs={6}>
+            <Content>
+              <Statistic
+                title="Manager Peso"
+                prefix={"P"}
+                value={112893}
+                formatter={formatter}
+              />
+            </Content>
           </Col>
           <Col xs={24} flex={1}>
-            <Content>Content</Content>
+            <Content style={{ overflowX: "scroll" }}>
+              <Table
+                // tableLayout="auto"
+                scroll={{ x: "max-content" }}
+                size="small"
+                loading={isLoading}
+                columns={columns}
+                dataSource={data?.data?.bookingList}
+                pagination={{ pageSize: 50, position: ["bottomCenter"] }}
+              />
+            </Content>
           </Col>
         </Row>
       </MainLayout>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, Col, Layout, Menu, Row } from "antd";
+import { Avatar, Col, Layout, Menu, Row, Space, Typography } from "antd";
 
 import {
   AppstoreOutlined,
@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import Logo from "../Logo";
-import Content from "../Content";
+const { Text } = Typography;
 
 const { Header, Content: AntdContent } = Layout;
 
@@ -45,7 +45,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           <Col xs={4} sm={2}>
             <Logo width="40" height="40" />
           </Col>
-          <Col xs={18} sm={20}>
+          <Col xs={19} sm={21}>
             <Menu
               onClick={onClick}
               selectedKeys={[current]}
@@ -54,7 +54,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
               theme="dark"
             />
           </Col>
-          <Col xs={2} sm={2}>
+          <Col xs={1} sm={1}>
             <Avatar
               style={{ backgroundColor: "#87d068" }}
               icon={<UserOutlined />}

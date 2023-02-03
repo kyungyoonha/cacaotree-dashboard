@@ -13,7 +13,7 @@ const Content = ({ children, style }: Props) => {
     <AntdContent
       style={{
         padding: 24,
-        minHeight: 150,
+        minHeight: 100,
         background: theme.colorBgContainer,
         borderRadius: 15,
         ...style,
