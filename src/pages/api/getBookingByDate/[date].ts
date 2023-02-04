@@ -21,7 +21,7 @@ export default async function handler(
     const {
       query: { date },
     } = req;
-
+    const start = new Date().getTime();
     if (!date) return;
 
     await doc.useServiceAccountAuth({
@@ -31,11 +31,15 @@ export default async function handler(
 
     await doc.getInfo();
     let sheet = doc.sheetsByTitle["Booking"];
-    let rows = await sheet.getRows();
+    // console.log("1. GET SHEET => ", new Date().getTime() - start);
+
+    let rows = await sheet.getRows({ offset: 3000 });
     await sheet.loadHeaderRow(1); // 헤더 Row를 다른 걸로 설정할 수도 있음.
 
     let header = rows[0]._sheet.headerValues;
     let index_date = header.indexOf("date");
+
+    // console.log("2. GET ROW => ", new Date().getTime() - start);
 
     const result: result = [];
     rows.forEach((row: any) => {
@@ -51,19 +55,20 @@ export default async function handler(
 
       result.push(result_temp);
     });
+    // console.log("3. GET RESULT => ", new Date().getTime() - start);
 
     let columns = header.map((item: string) => ({
       title: item,
       key: item,
       dataIndex: item,
     }));
+    // console.log("4. Done => ", new Date().getTime() - start);
 
-    // console.log(columns);
-
-    res.status(200).json({ ok: true, data: { columns, bookingList: result } });
+    res
+      .status(200)
+      .json({ ok: true, result: { columns, bookingList: result } });
   } catch (error) {
-    console.log("error");
-    // console.log(error);
+    console.log(error);
     res.status(500).json({ ok: false, error });
   }
 }

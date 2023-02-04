@@ -8,7 +8,6 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import Logo from "../Logo";
-const { Text } = Typography;
 
 const { Header, Content: AntdContent } = Layout;
 
@@ -34,7 +33,6 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const [current, setCurrent] = useState("mail");
 
   const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click ", e);
     setCurrent(e.key);
   };
 
@@ -66,7 +64,8 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       <AntdContent
         style={{
           margin: "20px",
-          minHeight: 280,
+          height: "calc(100vh - 100px)",
+          overflow: "hidden",
         }}
       >
         {children}

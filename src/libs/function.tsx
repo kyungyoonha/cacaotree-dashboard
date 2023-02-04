@@ -1,12 +1,18 @@
+type Prop = {
+  key: string;
+  minWidth?: string;
+};
+
 export const renderCellWithColor =
-  (key: string) => (text: any, record: any) => {
+  ({ key, minWidth }: Prop) =>
+  (text: any, record: any) => {
     const { color, columns } = statusColorBackground(record.status);
 
     return {
       props: {
         style: { background: columns.includes(key) ? color : "#FFF" },
       },
-      children: <div>{text}</div>,
+      children: <div style={{ minWidth }}>{text}</div>,
     };
   };
 

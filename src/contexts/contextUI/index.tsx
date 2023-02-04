@@ -1,9 +1,13 @@
+import dayjs from "dayjs";
 import React, { useMemo, ReactNode } from "react";
-import { State, reducer, onOpenMenu } from "./types";
+import { State, reducer, onOpenMenu, onChangeBookingFilterDate } from "./types";
 
 const initialState: State = {
   menuOpen: false,
+  bookingFilterDate: dayjs(new Date()),
   onOpenMenu: onOpenMenu,
+  onChangeBookingFilterDate: onChangeBookingFilterDate,
+  dispatch: () => null,
 };
 
 export const UIContext = React.createContext<State>(initialState);
