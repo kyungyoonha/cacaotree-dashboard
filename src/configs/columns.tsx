@@ -1,6 +1,6 @@
 import { renderCellWithColor, statusColorBackground } from "@/libs/function";
 
-const columns = [
+export const columns = [
   {
     title: "company",
     key: "company",
@@ -273,4 +273,19 @@ const columns = [
   //   },
 ];
 
-export default columns;
+export const columnsShort = columns.filter((column) => {
+  const exceptList = [
+    "discount",
+    "arrivedDate",
+    "pickCar",
+    "pickFlight",
+    "dropCar",
+    "room1",
+    "room2",
+    "room3",
+    "phone",
+    "massage",
+  ];
+
+  return !exceptList.includes(column.key);
+});

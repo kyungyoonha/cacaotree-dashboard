@@ -1,3 +1,5 @@
+import { Alert } from "antd";
+
 type Prop = {
   key: string;
   minWidth?: string;
@@ -6,20 +8,41 @@ type Prop = {
 export const renderCellWithColor =
   ({ key, minWidth }: Prop) =>
   (text: any, record: any) => {
-    const { color, columns } = statusColorBackground(record.status);
+    const { isStrong, color, columns } = statusColorBackground(record.status);
 
     return {
       props: {
-        style: { background: columns.includes(key) ? color : "#FFF" },
+        // style: { background: columns.includes(key) ? color : "#FFF" },
       },
-      children: <div style={{ minWidth }}>{text}</div>,
+      children:
+        isStrong && columns.includes(key) ? (
+          <Alert
+            message={text ? text : "-"}
+            type="success"
+            style={{
+              minWidth,
+              background: columns.includes(key) ? color : "#FFF",
+              padding: "5px",
+              fontSize: "8px",
+            }}
+          />
+        ) : (
+          <div style={{ minWidth }}>{text}</div>
+        ),
     };
   };
 
-export const statusColorBackground = (status: string) => {
+type Result = (status: string) => {
+  isStrong: boolean;
+  color: string;
+  columns: string[];
+};
+
+export const statusColorBackground: Result = (status) => {
   switch (status) {
     case "[0] Done":
       return {
+        isStrong: false,
         color: "#999999",
         columns: [
           "company",
@@ -52,6 +75,7 @@ export const statusColorBackground = (status: string) => {
       };
     case "[01] Arrival Night":
       return {
+        isStrong: true,
         color: "#9CC283",
         columns: [
           "status",
@@ -63,6 +87,7 @@ export const statusColorBackground = (status: string) => {
       };
     case "[02] Arrival Morning":
       return {
+        isStrong: true,
         color: "#B2A8D3",
         columns: [
           "status",
@@ -74,16 +99,19 @@ export const statusColorBackground = (status: string) => {
       };
     case "[03] Sleeping":
       return {
+        isStrong: true,
         color: "#FBE5A2",
         columns: ["status", "dropTime", "dropCar", "dropLocation"],
       };
     case "[03] Sleeping":
       return {
+        isStrong: true,
         color: "#FBE5A2",
         columns: ["status", "dropTime", "dropCar", "dropLocation"],
       };
     case "[04] Wating Pickup":
       return {
+        isStrong: true,
         color: "#75FCFD",
         columns: [
           "status",
@@ -95,21 +123,25 @@ export const statusColorBackground = (status: string) => {
       };
     case "[05] Comming":
       return {
+        isStrong: true,
         color: "#EA33F6",
         columns: ["status", "massageTime", "massage"],
       };
     case "[06] Waiting Massage":
       return {
+        isStrong: true,
         color: "#F19E39",
         columns: ["status", "massageTime", "massage"],
       };
     case "[06] Waiting Massage":
       return {
+        isStrong: true,
         color: "#F19E39",
         columns: ["status", "massageTime", "massage"],
       };
     case "[07] Having Massage":
       return {
+        isStrong: true,
         color: "#FFFF55",
         columns: [
           "status",
@@ -123,12 +155,14 @@ export const statusColorBackground = (status: string) => {
       };
     case "[08] Waiting Drop":
       return {
+        isStrong: true,
         color: "#69BBC4",
         columns: ["status", "dropTime", "dropCar", "dropLocation"],
       };
 
     default:
       return {
+        isStrong: false,
         color: "#fff",
         columns: [],
       };

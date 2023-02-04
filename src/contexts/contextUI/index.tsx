@@ -1,12 +1,20 @@
 import dayjs from "dayjs";
 import React, { useMemo, ReactNode } from "react";
-import { State, reducer, onOpenMenu, onChangeBookingFilterDate } from "./types";
+import {
+  State,
+  reducer,
+  onOpenMenu,
+  onChangeFilterBookingDate,
+  onChangeFilterColumnOption,
+} from "./types";
 
 const initialState: State = {
   menuOpen: false,
-  bookingFilterDate: dayjs(new Date()),
+  filterBookingDate: dayjs(new Date()),
+  filterColumnOption: "all",
   onOpenMenu: onOpenMenu,
-  onChangeBookingFilterDate: onChangeBookingFilterDate,
+  onChangeFilterBookingDate,
+  onChangeFilterColumnOption,
   dispatch: () => null,
 };
 

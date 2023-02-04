@@ -2,15 +2,18 @@ import { Dayjs } from "dayjs";
 
 export interface State {
   menuOpen: boolean;
-  bookingFilterDate: Dayjs;
+  filterBookingDate: Dayjs;
+  filterColumnOption: string;
   onOpenMenu: typeof onOpenMenu;
-  onChangeBookingFilterDate: typeof onChangeBookingFilterDate;
+  onChangeFilterBookingDate: typeof onChangeFilterBookingDate;
+  onChangeFilterColumnOption: typeof onChangeFilterColumnOption;
   dispatch: React.Dispatch<Action>;
 }
 
 export enum ActionType {
   OPEN_MENU,
-  CHANGE_BOOKING_FILTER_DATE,
+  CHANGE_FILTER_BOOKING_DATE,
+  CHANGE_FILTER_COLUMN_OPTION,
 }
 
 export type Action =
@@ -19,8 +22,12 @@ export type Action =
       payload: boolean;
     }
   | {
-      type: typeof ActionType.CHANGE_BOOKING_FILTER_DATE;
+      type: typeof ActionType.CHANGE_FILTER_BOOKING_DATE;
       payload: Dayjs;
+    }
+  | {
+      type: typeof ActionType.CHANGE_FILTER_COLUMN_OPTION;
+      payload: string;
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -31,10 +38,15 @@ export const reducer = (state: State, action: Action): State => {
         menuOpen: action.payload,
       };
 
-    case ActionType.CHANGE_BOOKING_FILTER_DATE:
+    case ActionType.CHANGE_FILTER_BOOKING_DATE:
       return {
         ...state,
-        bookingFilterDate: action.payload,
+        filterBookingDate: action.payload,
+      };
+    case ActionType.CHANGE_FILTER_COLUMN_OPTION:
+      return {
+        ...state,
+        filterColumnOption: action.payload,
       };
   }
 };
@@ -46,12 +58,22 @@ export const onOpenMenu = (data: boolean, dispatch: React.Dispatch<Action>) => {
   });
 };
 
-export const onChangeBookingFilterDate = (
+export const onChangeFilterBookingDate = (
   date: Dayjs,
   dispatch: React.Dispatch<Action>
 ) => {
   dispatch({
-    type: ActionType.CHANGE_BOOKING_FILTER_DATE,
+    type: ActionType.CHANGE_FILTER_BOOKING_DATE,
     payload: date,
+  });
+};
+
+export const onChangeFilterColumnOption = (
+  data: string,
+  dispatch: React.Dispatch<Action>
+) => {
+  dispatch({
+    type: ActionType.CHANGE_FILTER_COLUMN_OPTION,
+    payload: data,
   });
 };
