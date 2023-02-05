@@ -4,7 +4,9 @@ const { GoogleSpreadsheet } = require("google-spreadsheet");
 const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 
 type Result = ResultTemp[];
-type ResultTemp = string[];
+type ResultTemp = {
+  [key: string]: string;
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,25 +21,25 @@ export default async function handler(
     let sheet = doc.sheetsByTitle["Daily Report"];
     await sheet.loadCells("A4:J22");
 
-    const totalGuest =
-      sheet.getCellByA1("B4")._rawData.effectiveValue.numberValue;
-    const incomePlus =
-      sheet.getCellByA1("C4")._rawData.effectiveValue.numberValue;
-    const imcomeMinus =
-      sheet.getCellByA1("D4")._rawData.effectiveValue.numberValue;
-    const totalIncome =
-      sheet.getCellByA1("E4")._rawData.effectiveValue.numberValue;
-
     const topListPlus: Result = [];
-    const columnIndex = ["B", "C", "D", "E", "E", "F", "G", "H", "I"];
+    const columnIndex = [
+      { key: "rank", index: "B" },
+      { key: "date", index: "C" },
+      { key: "category", index: "D" },
+      { key: "type", index: "E" },
+      { key: "incharge", index: "F" },
+      { key: "incomePlus", index: "G" },
+      { key: "incomeMinus", index: "H" },
+      { key: "detail", index: "I" },
+    ];
     const rowStartIndex_plus = 8;
     new Array(5).fill(null).map((_, rowIdx) => {
-      const rowTemp: ResultTemp = [];
-      columnIndex.forEach((colIdx) => {
+      const rowTemp: ResultTemp = {};
+      columnIndex.forEach(({ key, index }) => {
         const data =
-          sheet.getCellByA1(`${colIdx}${rowStartIndex_plus + rowIdx}`)._rawData
+          sheet.getCellByA1(`${index}${rowStartIndex_plus + rowIdx}`)._rawData
             .formattedValue || "";
-        rowTemp.push(data);
+        rowTemp[key] = data;
       });
       topListPlus.push(rowTemp);
     });
@@ -45,21 +47,17 @@ export default async function handler(
     const topListMius: Result = [];
     const rowStartIndex_minus = 16;
     new Array(5).fill(null).map((_, rowIdx) => {
-      const rowTemp: ResultTemp = [];
-      columnIndex.forEach((colIdx) => {
+      const rowTemp: ResultTemp = {};
+      columnIndex.forEach(({ key, index }) => {
         const data =
-          sheet.getCellByA1(`${colIdx}${rowStartIndex_minus + rowIdx}`)._rawData
+          sheet.getCellByA1(`${index}${rowStartIndex_minus + rowIdx}`)._rawData
             .formattedValue || "";
-        rowTemp.push(data);
+        rowTemp[key] = data;
       });
       topListMius.push(rowTemp);
     });
 
     const result = {
-      totalGuest,
-      incomePlus,
-      imcomeMinus,
-      totalIncome,
       topListPlus,
       topListMius,
     };
