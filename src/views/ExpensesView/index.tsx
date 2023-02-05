@@ -4,7 +4,57 @@ import React from "react";
 import DashboardDaily from "./DashboardDaily";
 import useSWR from "swr";
 import { Table, Typography } from "antd";
+import ExpensesFilter from "./ExpensesFilter";
 const { Title } = Typography;
+
+const ExpensesView = () => {
+  const { data, isLoading } = useSWR(`/api/GetDailyReport`, null, {
+    refreshInterval: 1000,
+  });
+
+  return (
+    <MainLayout>
+      <div
+        style={{
+          height: "100%",
+          overflow: "scroll",
+        }}
+      >
+        <ExpensesFilter />
+        <DashboardDaily />
+        <Content style={{ overflow: "scroll", height: "300px" }}>
+          <Title level={5}>Top 5 Peso (+)</Title>
+          <Table
+            bordered
+            rowKey="rank"
+            scroll={{ x: "max-content", y: 600 }}
+            size="small"
+            loading={isLoading}
+            columns={columns}
+            dataSource={data?.result?.topListMius}
+            pagination={false}
+          />
+        </Content>
+        <br />
+        <Content style={{ overflow: "scroll", height: "300px" }}>
+          <Title level={5}>Top 5 Peso (+)</Title>
+          <Table
+            bordered
+            rowKey="rank"
+            scroll={{ x: "max-content", y: 600 }}
+            size="small"
+            loading={isLoading}
+            columns={columns}
+            dataSource={data?.result?.topListMius}
+            pagination={false}
+          />
+        </Content>
+      </div>
+    </MainLayout>
+  );
+};
+
+export default ExpensesView;
 
 export const columns = [
   {
@@ -56,52 +106,3 @@ export const columns = [
     render: (text: any) => <div style={{ minWidth: "50px" }}>{text}</div>,
   },
 ];
-
-const ExpensesView = () => {
-  const { data, isLoading } = useSWR(`/api/GetDailyReport`, null, {
-    refreshInterval: 1000,
-  });
-
-  console.log(data);
-  return (
-    <MainLayout>
-      <div
-        style={{
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
-        <DashboardDaily />
-        <Content style={{ overflow: "scroll", height: "300px" }}>
-          <Title level={5}>Top 5 Peso (+)</Title>
-          <Table
-            bordered
-            rowKey="rank"
-            scroll={{ x: "max-content", y: 600 }}
-            size="small"
-            loading={isLoading}
-            columns={columns}
-            dataSource={data?.result?.topListMius}
-            pagination={false}
-          />
-        </Content>
-        <br />
-        <Content style={{ overflow: "scroll", height: "300px" }}>
-          <Title level={5}>Top 5 Peso (+)</Title>
-          <Table
-            bordered
-            rowKey="rank"
-            scroll={{ x: "max-content", y: 600 }}
-            size="small"
-            loading={isLoading}
-            columns={columns}
-            dataSource={data?.result?.topListMius}
-            pagination={false}
-          />
-        </Content>
-      </div>
-    </MainLayout>
-  );
-};
-
-export default ExpensesView;

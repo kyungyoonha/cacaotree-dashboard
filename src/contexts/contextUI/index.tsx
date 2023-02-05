@@ -6,15 +6,18 @@ import {
   onOpenMenu,
   onChangeFilterBookingDate,
   onChangeFilterColumnOption,
+  onChangeFilterExpensesDate,
 } from "./types";
 
 const initialState: State = {
   menuOpen: false,
   filterBookingDate: dayjs(new Date()),
   filterColumnOption: "all",
+  filterExpensesDate: dayjs(new Date()),
   onOpenMenu: onOpenMenu,
   onChangeFilterBookingDate,
   onChangeFilterColumnOption,
+  onChangeFilterExpensesDate,
   dispatch: () => null,
 };
 

@@ -10,8 +10,6 @@ const DashboardDaily = () => {
     refreshInterval: 1000,
   });
 
-  console.log({ data });
-
   return (
     <>
       <Row gutter={[16, 16]}>
