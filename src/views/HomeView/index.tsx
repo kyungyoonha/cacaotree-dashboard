@@ -12,7 +12,7 @@ import dayjs from "dayjs";
 const HomeView = () => {
   const { filterBookingDate, filterColumnOption } = useUIContext();
   const { data, isLoading } = useSWR(
-    `/api/getBookingByDate/${dayjs(filterBookingDate).format("YYYY-MM-DD")}`,
+    `/api/GetBookingByDate/${dayjs(filterBookingDate).format("YYYY-MM-DD")}`,
     null,
     { refreshInterval: 1000 }
   );

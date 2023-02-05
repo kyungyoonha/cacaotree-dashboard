@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Col, Layout, Menu, Row, Space, Typography } from "antd";
 
 import {
@@ -8,6 +8,8 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import Logo from "../Logo";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const { Header, Content: AntdContent } = Layout;
 
@@ -17,24 +19,31 @@ interface MainLayoutProps {
 
 const items: MenuProps["items"] = [
   {
-    label: "Dashboard",
+    label: <Link href="/">Dashboard</Link>,
     key: "dashboard",
     icon: <AppstoreOutlined />,
   },
   {
-    label: "Expenses",
+    label: <Link href="/expenses">Expenses</Link>,
     key: "expenses",
     icon: <SettingOutlined />,
-    disabled: true,
   },
 ];
 
 const MainLayout = ({ children }: MainLayoutProps) => {
-  const [current, setCurrent] = useState("mail");
+  const { asPath } = useRouter();
+  const [current, setCurrent] = useState("dashboard");
 
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
   };
+
+  useEffect(() => {
+    if (!asPath) return;
+    if (asPath === "/") return setCurrent("dashboard");
+    const pageId = asPath.split("/")[1];
+    setCurrent(pageId);
+  }, [asPath]);
 
   return (
     <Layout style={{ height: "100vh", overflowY: "scroll" }}>

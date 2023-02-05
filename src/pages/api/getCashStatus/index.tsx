@@ -1,4 +1,3 @@
-import dayjs from "dayjs";
 import type { NextApiRequest, NextApiResponse } from "next";
 const { GoogleSpreadsheet } = require("google-spreadsheet");
 
@@ -20,7 +19,7 @@ export default async function handler(
     const spaPeso = sheet.getCellByA1("B4")._rawData.effectiveValue.numberValue;
     const spaDollar =
       sheet.getCellByA1("C4")._rawData.effectiveValue.numberValue;
-    const spaWon = sheet.getCellByA1("C4")._rawData.effectiveValue.numberValue;
+    const spaWon = sheet.getCellByA1("D4")._rawData.effectiveValue.numberValue;
     const managerPeso =
       sheet.getCellByA1("E4")._rawData.effectiveValue.numberValue;
 

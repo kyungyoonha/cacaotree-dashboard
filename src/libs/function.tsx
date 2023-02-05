@@ -12,7 +12,9 @@ export const renderCellWithColor =
 
     return {
       props: {
-        // style: { background: columns.includes(key) ? color : "#FFF" },
+        style: {
+          background: !isStrong && columns.includes(key) ? color : "#FFF",
+        },
       },
       children:
         isStrong && columns.includes(key) ? (
