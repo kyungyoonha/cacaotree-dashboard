@@ -22,12 +22,12 @@ const ExpensesView = () => {
       >
         <ExpensesFilter />
         <DashboardDaily />
-        <Content style={{ overflow: "scroll", height: "300px" }}>
+        <Content>
           <Title level={5}>Top 5 Peso (+)</Title>
           <Table
             bordered
             rowKey="rank"
-            scroll={{ y: 600 }}
+            scroll={{ x: "max-content" }}
             size="small"
             loading={isLoading}
             columns={columns}
@@ -36,12 +36,12 @@ const ExpensesView = () => {
           />
         </Content>
         <br />
-        <Content style={{ overflow: "scroll", height: "300px" }}>
+        <Content>
           <Title level={5}>Top 5 Peso (+)</Title>
           <Table
             bordered
             rowKey="rank"
-            scroll={{ y: 600 }}
+            scroll={{ x: "max-content" }}
             size="small"
             loading={isLoading}
             columns={columns}
