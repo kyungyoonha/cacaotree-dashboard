@@ -21,15 +21,21 @@ const HomeView = () => {
     <MainLayout>
       <div
         style={{
-          display: "flex",
+          // display: "flex",
           height: "100%",
-          flexDirection: "column",
+          // flexDirection: "column",
+          overflow: "scroll",
         }}
       >
         <DashboardCash />
         <BookingFilter />
 
-        <Content style={{ overflow: "scroll", flex: 1 }}>
+        <Content
+          style={{
+            // overflow: "scroll", flex: 1
+            minHeight: "calc(100%-500px)",
+          }}
+        >
           <Table
             bordered
             rowKey="rowNumber"
