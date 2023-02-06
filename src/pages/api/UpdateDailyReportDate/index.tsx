@@ -27,14 +27,12 @@ export default async function handler(
     await sheet.loadCells("B2:B2");
 
     let prev = sheet.getCellByA1("B2");
-    console.log(date);
-    console.log(dayjs(date).format("YYYY-MM-DD"));
+
     prev.value = dayjs(date).format("YYYY-MM-DD");
     await sheet.saveUpdatedCells();
 
     res.status(200).json({ ok: true });
   } catch (error) {
-    console.log(error);
     console.log("error");
     res.status(500).json({ ok: false, error });
   }
