@@ -34,6 +34,7 @@ const HomeView = () => {
             bordered
             rowKey="rowNumber"
             size="small"
+            scroll={{ x: "max-content" }}
             loading={isLoading}
             columns={filterColumnOption === "all" ? columns : columnsShort}
             dataSource={data?.result?.bookingList}
