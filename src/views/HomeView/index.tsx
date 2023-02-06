@@ -33,7 +33,10 @@ const HomeView = () => {
           <Table
             bordered
             rowKey="rowNumber"
-            scroll={{ x: "max-content", y: 500 }}
+            scroll={{
+              // x: "max-content",
+              y: 500,
+            }}
             size="small"
             loading={isLoading}
             columns={filterColumnOption === "all" ? columns : columnsShort}
