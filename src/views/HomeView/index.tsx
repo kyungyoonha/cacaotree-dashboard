@@ -14,7 +14,7 @@ const HomeView = () => {
   const { data, isLoading } = useSWR(
     `/api/GetBookingByDate/${dayjs(filterBookingDate).format("YYYY-MM-DD")}`,
     null,
-    { refreshInterval: 1000 }
+    { refreshInterval: 2000 }
   );
 
   return (

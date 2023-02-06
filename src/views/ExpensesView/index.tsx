@@ -27,7 +27,7 @@ const ExpensesView = () => {
           <Table
             bordered
             rowKey="rank"
-            scroll={{ x: "max-content", y: 600 }}
+            scroll={{ y: 600 }}
             size="small"
             loading={isLoading}
             columns={columns}
@@ -41,7 +41,7 @@ const ExpensesView = () => {
           <Table
             bordered
             rowKey="rank"
-            scroll={{ x: "max-content", y: 600 }}
+            scroll={{ y: 600 }}
             size="small"
             loading={isLoading}
             columns={columns}
