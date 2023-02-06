@@ -6,7 +6,7 @@ import useSWR from "swr";
 import { formatter } from "@/libs/formatter";
 
 const DashboardCash = () => {
-  const { data, isLoading } = useSWR(`/api/GetCashStatus`, null, {
+  const { data, isLoading } = useSWR(`/api/GetBookingCashStatus`, null, {
     refreshInterval: 1000,
   });
 
