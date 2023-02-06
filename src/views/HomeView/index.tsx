@@ -34,7 +34,7 @@ const HomeView = () => {
             bordered
             rowKey="rowNumber"
             scroll={{
-              // x: "max-content",
+              x: "100vw",
               y: 500,
             }}
             size="small"
