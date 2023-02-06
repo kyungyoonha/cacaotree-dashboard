@@ -9,7 +9,7 @@ const { Title } = Typography;
 
 const ExpensesView = () => {
   const { data, isLoading } = useSWR(`/api/GetDailyReport`, null, {
-    refreshInterval: 1000,
+    // refreshInterval: 2000,
   });
 
   return (

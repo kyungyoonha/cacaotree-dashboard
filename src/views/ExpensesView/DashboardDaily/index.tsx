@@ -7,7 +7,7 @@ import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
 
 const DashboardDaily = () => {
   const { data, isLoading } = useSWR(`/api/GetDailyReportStatus`, null, {
-    refreshInterval: 1000,
+    // refreshInterval: 2000,
   });
 
   return (

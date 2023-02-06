@@ -13,8 +13,8 @@ const HomeView = () => {
   const { filterBookingDate, filterColumnOption } = useUIContext();
   const { data, isLoading } = useSWR(
     `/api/GetBookingByDate/${dayjs(filterBookingDate).format("YYYY-MM-DD")}`,
-    null,
-    { refreshInterval: 2000 }
+    null
+    // { refreshInterval: 2000 }
   );
 
   return (
