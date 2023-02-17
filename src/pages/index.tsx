@@ -8,7 +8,10 @@ export default function Home() {
       <Head>
         <title>Booking Dashboard</title>
         <meta name="description" content="Cacaotree - Booking Dashboard" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=yes"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeView />

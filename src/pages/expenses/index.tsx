@@ -8,7 +8,10 @@ const Expenses = () => {
       <Head>
         <title>Expense Dashboard</title>
         <meta name="description" content="Cacaotree - Expense Dashboar" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=yes"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ExpensesView />

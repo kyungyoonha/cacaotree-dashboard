@@ -4,11 +4,18 @@ import Image from "next/image";
 interface LogoProps {
   width: number | `${number}`;
   height: number | `${number}`;
+  margin: string | `${string}`;
 }
 
-const Logo = ({ width, height }: LogoProps) => {
+const Logo = ({ width, height, margin }: LogoProps) => {
   return (
-    <Image width={width} height={height} src="/logo.png" alt="main-logo" />
+    <Image
+      width={width}
+      height={height}
+      style={{ margin }}
+      src="/logo.png"
+      alt="main-logo"
+    />
   );
 };
 

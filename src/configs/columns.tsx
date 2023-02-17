@@ -35,16 +35,7 @@ export const columns = [
     title: "name",
     key: "name",
     dataIndex: "name",
-    render: renderCellWithColor({ key: "name" }),
-    // render: (text: string) => (
-    //   <div
-    //     style={{
-    //       width: "200px",
-    //     }}
-    //   >
-    //     {text}
-    //   </div>
-    // ),
+    render: renderCellWithColor({ key: "name", minWidth: "250px" }),
   },
   {
     title: "pax",
@@ -57,15 +48,6 @@ export const columns = [
     key: "date",
     dataIndex: "date",
     render: renderCellWithColor({ key: "date" }),
-    // render: (text: string) => (
-    //   <div
-    //     style={{
-    //       width: "100px",
-    //     }}
-    //   >
-    //     {text}
-    //   </div>
-    // ),
   },
   {
     title: "arrivedDate",
@@ -78,27 +60,18 @@ export const columns = [
     key: "package",
     dataIndex: "package",
     render: renderCellWithColor({ key: "package", minWidth: "60px" }),
-    // render: (text: string) => (
-    //   <div
-    //     style={{
-    //       width: "80px",
-    //     }}
-    //   >
-    //     {text}
-    //   </div>
-    // ),
   },
   {
     title: "status",
     key: "status",
     dataIndex: "status",
-    render: renderCellWithColor({ key: "status", minWidth: "50px" }),
+    render: renderCellWithColor({ key: "status", minWidth: "120px" }),
   },
   {
     title: "pickTime",
     key: "pickTime",
     dataIndex: "pickTime",
-    render: renderCellWithColor({ key: "pickTime", minWidth: "50px" }),
+    render: renderCellWithColor({ key: "pickTime", minWidth: "70px" }),
   },
   {
     title: "pickCar",
@@ -136,30 +109,12 @@ export const columns = [
     key: "massage",
     dataIndex: "massage",
     render: renderCellWithColor({ key: "massage", minWidth: "60px" }),
-    // render: (text: string) => (
-    //   <div
-    //     style={{
-    //       width: "130px",
-    //     }}
-    //   >
-    //     {text}
-    //   </div>
-    // ),
   },
   {
     title: "dropTime",
     key: "dropTime",
     dataIndex: "dropTime",
     render: renderCellWithColor({ key: "dropTime" }),
-    // render: (text: string) => (
-    //   <div
-    //     style={{
-    //       width: "80px",
-    //     }}
-    //   >
-    //     {text}
-    //   </div>
-    // ),
   },
   {
     title: "dropCar",
@@ -172,15 +127,6 @@ export const columns = [
     key: "dropLocation",
     dataIndex: "dropLocation",
     render: renderCellWithColor({ key: "dropLocation" }),
-    // render: (text: string) => (
-    //   <div
-    //     style={{
-    //       width: "120px",
-    //     }}
-    //   >
-    //     {text}
-    //   </div>
-    // ),
   },
   //   { title: "dollar", key: "dollar", dataIndex: "dollar" },
   //   { title: "rate", key: "rate", dataIndex: "rate" },
@@ -250,15 +196,6 @@ export const columns = [
     key: "memo",
     dataIndex: "memo",
     render: renderCellWithColor({ key: "memo" }),
-    // render: (text: string) => (
-    //   <div
-    //     style={{
-    //       width: "300px",
-    //     }}
-    //   >
-    //     {text}
-    //   </div>
-    // ),
   },
   //   { title: "timestamp", key: "timestamp", dataIndex: "timestamp" },
   //   {

@@ -10,13 +10,14 @@ const GlobalStyles = createGlobalStyle`
 
     html {
         scroll-behavior: smooth;
-        width: 100%;
         height: 100%;
+        min-width: 1280px;
     }
 
     ul {
         list-style:none;
     }
+
     a {
         text-decoration: none;
         color: inherit;

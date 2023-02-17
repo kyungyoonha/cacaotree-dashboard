@@ -8,6 +8,7 @@ import DashboardCash from "./DashboardCash";
 import BookingFilter from "./BookingFilter";
 import { useUIContext } from "@/contexts/contextUI";
 import dayjs from "dayjs";
+import styled from "styled-components";
 
 const HomeView = () => {
   const { filterBookingDate, filterColumnOption } = useUIContext();
@@ -18,38 +19,34 @@ const HomeView = () => {
   );
 
   return (
-    <MainLayout>
-      <div
-        style={{
-          // display: "flex",
-          height: "100%",
-          // flexDirection: "column",
-          overflow: "scroll",
-        }}
-      >
+    <MainLayout display="inline-block">
+      <Wrapper>
         <DashboardCash />
         <BookingFilter />
 
         <Content
           style={{
-            // overflow: "scroll", flex: 1
             minHeight: "calc(100%-500px)",
+            display: "inline-block",
           }}
         >
           <Table
             bordered
             rowKey="rowNumber"
             size="small"
-            scroll={{ x: "max-content" }}
             loading={isLoading}
             columns={filterColumnOption === "all" ? columns : columnsShort}
             dataSource={data?.result?.bookingList}
             pagination={{ pageSize: 50, position: ["bottomCenter"] }}
           />
         </Content>
-      </div>
+      </Wrapper>
     </MainLayout>
   );
 };
 
 export default HomeView;
+
+const Wrapper = styled.div`
+  height: 100%;
+`;

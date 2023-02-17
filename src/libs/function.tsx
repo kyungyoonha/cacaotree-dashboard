@@ -26,6 +26,7 @@ export const renderCellWithColor =
               background: columns.includes(key) ? color : "#FFF",
               padding: "5px",
               fontSize: "8px",
+              display: "inline-block",
             }}
           />
         ) : (

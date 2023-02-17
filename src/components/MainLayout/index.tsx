@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Col, Layout, Menu, Row, Space, Typography } from "antd";
+import { Avatar, Layout, Menu } from "antd";
 
-import {
-  AppstoreOutlined,
-  UserOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { AppstoreOutlined, UserOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import Logo from "../Logo";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 
 const { Header, Content: AntdContent } = Layout;
 
 interface MainLayoutProps {
+  display: string | `${string}`;
   children: React.ReactNode;
 }
 
@@ -23,14 +21,14 @@ const items: MenuProps["items"] = [
     key: "dashboard",
     icon: <AppstoreOutlined />,
   },
-  {
-    label: <Link href="/expenses">Expenses</Link>,
-    key: "expenses",
-    icon: <SettingOutlined />,
-  },
+  // {
+  //   label: <Link href="/expenses">Expenses</Link>,
+  //   key: "expenses",
+  //   icon: <SettingOutlined />,
+  // },
 ];
 
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({ display, children }: MainLayoutProps) => {
   const { asPath } = useRouter();
   const [current, setCurrent] = useState("dashboard");
 
@@ -46,40 +44,48 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   }, [asPath]);
 
   return (
-    <Layout style={{ height: "100vh", overflowY: "scroll" }}>
-      <Header className="header">
-        <Row>
-          <Col xs={4} sm={2}>
-            <Logo width="40" height="40" />
-          </Col>
-          <Col xs={19} sm={21}>
-            <Menu
-              onClick={onClick}
-              selectedKeys={[current]}
-              mode="horizontal"
-              items={items}
-              theme="dark"
-            />
-          </Col>
-          <Col xs={1} sm={1}>
-            <Avatar
-              style={{ backgroundColor: "#87d068" }}
-              icon={<UserOutlined />}
-            />
-          </Col>
-        </Row>
-      </Header>
+    <StyledLayout display={display}>
+      <StyledHeader className="header">
+        <Logo width="40" height="40" margin="0 30px" />
+
+        <Menu
+          onClick={onClick}
+          selectedKeys={[current]}
+          mode="horizontal"
+          items={items}
+          theme="dark"
+          style={{ flex: 1 }}
+        />
+
+        <Avatar
+          style={{ backgroundColor: "#87d068" }}
+          icon={<UserOutlined />}
+        />
+      </StyledHeader>
 
       <AntdContent
         style={{
+          display: "inline-block",
           margin: "20px",
           height: "calc(100vh - 100px)",
-          overflow: "hidden",
         }}
       >
         {children}
       </AntdContent>
-    </Layout>
+    </StyledLayout>
   );
 };
 export default MainLayout;
+
+type Props = {
+  display: string;
+};
+const StyledLayout = styled(Layout)<Props>`
+  display: inline-block;
+  min-width: 100vw;
+`;
+
+const StyledHeader = styled(Header)`
+  display: flex;
+  align-items: center;
+`;

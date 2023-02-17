@@ -5,6 +5,8 @@ import DashboardDaily from "./DashboardDaily";
 import useSWR from "swr";
 import { Table, Typography } from "antd";
 import ExpensesFilter from "./ExpensesFilter";
+import styled from "styled-components";
+
 const { Title } = Typography;
 
 const ExpensesView = () => {
@@ -13,13 +15,8 @@ const ExpensesView = () => {
   });
 
   return (
-    <MainLayout>
-      <div
-        style={{
-          height: "100%",
-          overflow: "scroll",
-        }}
-      >
+    <MainLayout display="block">
+      <Wrapper>
         <ExpensesFilter />
         <DashboardDaily />
         <Content>
@@ -27,7 +24,6 @@ const ExpensesView = () => {
           <Table
             bordered
             rowKey="rank"
-            scroll={{ x: "max-content" }}
             size="small"
             loading={isLoading}
             columns={columns}
@@ -41,7 +37,6 @@ const ExpensesView = () => {
           <Table
             bordered
             rowKey="rank"
-            scroll={{ x: "max-content" }}
             size="small"
             loading={isLoading}
             columns={columns}
@@ -49,12 +44,16 @@ const ExpensesView = () => {
             pagination={false}
           />
         </Content>
-      </div>
+      </Wrapper>
     </MainLayout>
   );
 };
 
 export default ExpensesView;
+
+const Wrapper = styled.div`
+  height: 100%;
+`;
 
 export const columns = [
   {
